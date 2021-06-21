@@ -1,0 +1,117 @@
+body,
+html {
+  background-color: #242424;
+  color: #e6e6e6;
+  font-size: 20px;
+  font-family: monospace;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="text"],
+input[type="number"] {
+  background-color: #151515;
+  color: #c2bbe0;
+  font-size: 1rem;
+  padding: 5px;
+  box-shadow: inset 0 0 2px currentColor;
+  border-radius: 50px;
+  text-align: center;
+  outline: none;
+  border: 0px solid grey;
+}
+
+input[type="checkbox"] {
+  outline: none;
+}
+
+#inputs {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: inherit;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#numb {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+#filter {
+  width: 320px;
+  margin-bottom: 10px;
+}
+
+#exact_filter {
+  margin-left: 8px;
+}
+
+#list {
+  display: table;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.list_item {
+  display: table-row;
+  padding-bottom: 20px;
+}
+
+.list_item > div {
+  padding: 10px;
+}
+
+.list_item:first-child > div {
+  padding-top: 0;
+}
+
+.list_item:last-child > div {
+  padding-bottom: 50px;
+}
+
+.list_item_word {
+  display: table-cell;
+  text-align: right;
+  text-transform: capitalize;
+}
+
+.list_item_word_2 {
+  display: table-cell;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.list_item_arrow {
+  display: table-cell;
+  text-align: center;
+  color: #c2bbe0;
+}
+
+.flex_row_center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.separator {
+  opacity: 0.5;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.pointer:hover {
+  text-shadow: 0 0 10px currentColor;
+}
