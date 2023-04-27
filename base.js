@@ -121,11 +121,11 @@ App.update = (txt = ``) => {
 
     if (include) {
       s += `
-			<div class='list_item'>
-				<div class='list_item_word'>${App.nouns[i]}</div>
-				<div class='list_item_arrow'>-&gt;</div>
-				<div class='list_item_word_2'>${App.nouns[index]}</div>
-			</div>`
+      <div class='list_item'>
+        <div class='list_item_word'>${App.nouns[i]}</div>
+        <div class='list_item_arrow'>-&gt;</div>
+        <div class='list_item_word_2'>${App.nouns[index]}</div>
+      </div>`
     }
 
     index += 1
