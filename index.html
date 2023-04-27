@@ -4,29 +4,29 @@
 	<head>
 		<title>Coke Bottle Glasses</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">
-		<link rel="stylesheet" type="text/css" href="style.css?v=1">
-		<script src='base.js?v=4'></script>
-		<script src='nouns.js?v=1'></script>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="base.js"></script>
+		<script src="nouns.js"></script>
 
 		<script>
-			window.onload = function() {
-				M.init()
+			window.onload = () => {
+				App.init()
 			}
 		</script>
 	</head>
 
 	<body>
-		<div id='inputs'>
-			<input type='number' max='9999' min='0' id='numb' value='89' title='Page'>
-			<input type='text' id='filter' placeholder='Filter'>
-			<div class='flex_row_center'>
+		<div id="inputs">
+			<input type="number" max="9999" min="0" id="numb" value="89" title="Page">
+			<input type="text" id="filter" placeholder="Filter">
+			<div class="flex_row_center">
 				<div>Exact:</div>
-				<input id='exact_filter' type='checkbox'>
-				<div class='separator'>|</div>
-				<div id='clear_filter' class='pointer'>Clear</div>
+				<input id="exact_filter" type="checkbox">
+				<div class="separator">|</div>
+				<div id="clear_filter" class="pointer">Clear</div>
 			</div>
 		</div>
-		<div id='list'></div>
+		<div id="list"></div>
 	</body>
 </html>

@@ -1,26 +1,26 @@
-const M = {}
+const App = {}
 
-M.init = function () {
-  M.numb = M.$("#numb")
-  M.filter = M.$("#filter")
+App.init = () => {
+  App.numb = App.el(`#numb`)
+  App.filter = App.el(`#filter`)
 
-  M.keydec()
-  M.start_widgets()
-  M.update()
+  App.keydec()
+  App.start_widgets()
+  App.update()
 
-  if (M.numb.value) {
-    M.do_numb_action()
+  if (App.numb.value) {
+    App.do_numb_action()
   }
 
-  if (M.filter.value) {
-    M.do_filter_action()
+  if (App.filter.value) {
+    App.do_filter_action()
   }
 
-  M.filter.focus()
-  M.move_cursor_to_end(M.filter)
+  App.filter.focus()
+  App.move_cursor_to_end(App.filter)
 }
 
-M.$ = function (s, parent = false) {
+App.el = (s, parent = false) => {
   if (!parent) {
     parent = document
   }
@@ -28,28 +28,14 @@ M.$ = function (s, parent = false) {
   return parent.querySelector(s)
 }
 
-M.$$ = function (s, parent = false, direct = false) {
-  if (!parent) {
-    parent = document
-  }
-
-  let items = Array.from(parent.querySelectorAll(s))
-
-  if (direct) {
-    items = items.filter((node) => node.parentNode === parent)
-  }
-
-  return items
-}
-
-M.debounce = function (func, wait, immediate) {
+App.debounce = (func, wait, immediate) => {
   let timeout
 
   return function executedFunction() {
     let context = this
     let args = arguments
 
-    let later = function () {
+    let later = () => {
       timeout = null
       if (!immediate) func.apply(context, args)
     }
@@ -61,49 +47,50 @@ M.debounce = function (func, wait, immediate) {
   }
 }
 
-M.move_cursor_to_end = function (element) {
+App.move_cursor_to_end = (element) => {
   element.selectionStart = element.selectionEnd = element.value.length
 }
 
-M.do_numb_action = function () {
-  M.numb.value = parseInt(M.numb.value.replace(/\D/g, ""))
+App.do_numb_action = () => {
+  App.numb.value = parseInt(App.numb.value.replace(/\D/g, ``))
 
-  if (M.numb.value > 9999) {
-    M.numb.value = 9999
-  } else if (M.numb.value != "" && M.numb.value < 0) {
-    M.numb.value = 0
+  if (App.numb.value > 9999) {
+    App.numb.value = 9999
+  }
+  else if (App.numb.value != `` && App.numb.value < 0) {
+    App.numb.value = 0
   }
 
-  M.update(M.filter.value.trim())
+  App.update(App.filter.value.trim())
 }
 
-M.do_filter_action = function () {
-  M.update(M.filter.value.trim())
+App.do_filter_action = () => {
+  App.update(App.filter.value.trim())
 }
 
-M.keydec = function () {
-  M.numb.addEventListener(
-    "input",
-    M.debounce(function (e) {
-      M.do_numb_action()
+App.keydec = () => {
+  App.numb.addEventListener(
+    `input`,
+    App.debounce((e) => {
+      App.do_numb_action()
     }, 350)
   )
 
-  M.filter.addEventListener(
-    "input",
-    M.debounce(function (e) {
-      M.do_filter_action()
+  App.filter.addEventListener(
+    `input`,
+    App.debounce((e) => {
+      App.do_filter_action()
     }, 350)
   )
 
-  M.filter.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      M.clear_filter()
+  App.filter.addEventListener(`keydown`, (e) => {
+    if (e.key === `Escape`) {
+      App.clear_filter()
     }
   })
 
-  document.addEventListener("keydown", function (e) {
-    if (document.activeElement !== M.filter) {
+  document.addEventListener(`keydown`, (e) => {
+    if (document.activeElement !== App.filter) {
       if (e.key.length === 1 && e.key.match(/[a-zA-Z]/)) {
         filter.focus()
       }
@@ -111,31 +98,33 @@ M.keydec = function () {
   })
 }
 
-M.update = function (txt = "") {
+App.update = (txt = ``) => {
   txt = txt.toLowerCase()
-  let s = ""
+  let s = ``
   let all = txt ? false : true
-  let len = M.nouns.length
-  let index = parseInt(M.numb.value) % len
-  let exact = M.$("#exact_filter").checked
+  let len = App.nouns.length
+  let index = parseInt(App.numb.value) % len
+  let exact = App.el(`#exact_filter`).checked
 
-  for (let i = 0; i < M.nouns.length; i++) {
+  for (let i = 0; i < App.nouns.length; i++) {
     let include = false
 
     if (all) {
       include = true
-    } else if (exact) {
-      include = M.nouns[i] === txt || M.nouns[index] === txt
-    } else {
-      include = M.nouns[i].includes(txt) || M.nouns[index].includes(txt)
+    }
+    else if (exact) {
+      include = App.nouns[i] === txt || App.nouns[index] === txt
+    }
+    else {
+      include = App.nouns[i].includes(txt) || App.nouns[index].includes(txt)
     }
 
     if (include) {
       s += `
 			<div class='list_item'>
-				<div class='list_item_word'>${M.nouns[i]}</div>
+				<div class='list_item_word'>${App.nouns[i]}</div>
 				<div class='list_item_arrow'>-&gt;</div>
-				<div class='list_item_word_2'>${M.nouns[index]}</div>
+				<div class='list_item_word_2'>${App.nouns[index]}</div>
 			</div>`
     }
 
@@ -146,24 +135,24 @@ M.update = function (txt = "") {
     }
   }
 
-  M.$("#list").innerHTML = s
+  App.el(`#list`).innerHTML = s
 }
 
-M.start_widgets = function () {
-  M.$("#exact_filter").addEventListener("change", function (e) {
-    if (M.filter.value) {
-      M.do_filter_action()
+App.start_widgets = () => {
+  App.el(`#exact_filter`).addEventListener(`change`, (e) => {
+    if (App.filter.value) {
+      App.do_filter_action()
     }
   })
 
-  M.$("#clear_filter").addEventListener("click", function (e) {
-    M.clear_filter()
+  App.el(`#clear_filter`).addEventListener(`click`, (e) => {
+    App.clear_filter()
   })
 }
 
-M.clear_filter = function () {
-  if (M.filter.value) {
-    M.filter.value = ""
-    M.do_filter_action()
+App.clear_filter = () => {
+  if (App.filter.value) {
+    App.filter.value = ``
+    App.do_filter_action()
   }
 }
